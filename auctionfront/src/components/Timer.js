@@ -5,8 +5,6 @@ function Timer() {
   const [minutes, setMinutes] = useState(0)
   const [hours, setHours] = useState(0)
   const [days, setDays] = useState(0)
-  const demoTime = '2022-11-20T15:00:00.102Z'
-  // const demoDate = new Date(demoTime)
   const demoDate = new Date()
   const demoHours = 48
 

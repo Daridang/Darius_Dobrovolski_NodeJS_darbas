@@ -38,20 +38,19 @@ function SingleAuction() {
       }
     )
 
-    console.log('response: ', response)
     if (!response.ok) {
       throw new Error(response.statusText)
     }
 
     const data = await response.json()
-    console.log('setAuction: ', data)
+
     setAuction(data)
   }
 
 
   return (
     <div className='shdw'>
-      {/* <h2>Single Auction</h2> */}
+
       <div className='auction-wrapper shdw'>
 
         <img src={auction ? auction.image : 'https://fakeimg.pl/400x400'} alt='Auction item' />

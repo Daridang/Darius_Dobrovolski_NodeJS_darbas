@@ -1,5 +1,6 @@
 import React from 'react'
 import '../style/card.css'
+import Timer from './Timer'
 
 function AuctionItem({ data, onClick }) {
 
@@ -11,7 +12,7 @@ function AuctionItem({ data, onClick }) {
 
       <div className='card__info'>
         <h3>{data.title}</h3>
-        <p><span>Time left: </span>{data.time}</p>
+        <p><span>Time left: </span>{<Timer time={data.time} />}</p>
         <p><span>Price: </span>{data.startPrice} Eur</p>
         <p><span>Bids: </span>{data.bids.length}</p>
       </div>
