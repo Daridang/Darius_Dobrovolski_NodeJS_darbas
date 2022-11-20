@@ -1,0 +1,9 @@
+.bids-list {
+  height: 130px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.bid-menu p {
+  color: red;
+}
