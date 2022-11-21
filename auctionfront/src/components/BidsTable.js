@@ -5,7 +5,7 @@ import '../style/bids-table.css'
 function BidsTable({ auctionId }) {
   const getBidsUrl = `http://localhost:5000/bids/${auctionId}`
 
-  const [bids, setBids] = useState()
+  const [bids, setBids] = useState([])
   const [bidErr, setBidErr] = useState()
   const amountInput = useRef()
 
@@ -27,11 +27,13 @@ function BidsTable({ auctionId }) {
   }
 
   const bid = async () => {
-    if (Number(amountInput.current.value) <= Number(bids[0].bidValue)) {
-      console.log('err: ?')
-      setBidErr('Amount must be greater than ' + bids[0].bidValue)
-      return
+    if (Number(bids.length > 0)) {
+      if (Number(amountInput.current.value) <= Number(bids[0].bidValue)) {
+        setBidErr('Amount must be greater than ' + bids[0].bidValue)
+        return
+      }
     }
+
     const response = await fetch(getBidsUrl, {
       method: 'POST',
       headers: {

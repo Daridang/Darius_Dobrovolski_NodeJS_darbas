@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { AppContext } from '../App'
 import BidsTable from '../components/BidsTable'
 import Timer from '../components/Timer'
 import '../style/single-auction.css'
 
 function SingleAuction() {
+  const { timeLeft, setTimeLeft } = useContext(AppContext)
   const [auction, setAuction] = useState()
-  const [timeLeft, setTimeLeft] = useState()
 
   const { id } = useParams('id')
 
@@ -15,12 +16,6 @@ function SingleAuction() {
   useEffect(() => {
     getAuction()
   }, [])
-
-  useEffect(() => {
-    if (auction) {
-      console.log('created: ', new Date(auction.createdAt).toLocaleString())
-    }
-  }, [auction])
 
   const onBack = () => {
     navigate('/auctions')
@@ -57,8 +52,8 @@ function SingleAuction() {
 
         <div className='auction-wrapper__info'>
           <h3>{auction ? auction.title : ''}</h3>
-          <Timer />
-          <p><span>Time left: </span>{auction ? auction.time : ''}</p>
+          <p><span>Time left: </span></p>
+          <Timer itemData={auction ? auction : ''} />
           <p><span>Price: </span>{auction ? auction.startPrice : ''} Eur</p>
           <p><span>Bids: </span>{auction ? auction.bids.length : '0'}</p>
           <BidsTable auctionId={id} />

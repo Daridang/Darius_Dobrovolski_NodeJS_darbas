@@ -1,10 +1,10 @@
-import React, { useRef, useState, useEffect, useContext } from 'react'
+import React, { useRef, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../App'
 
 function Login() {
   const { user, setUser } = useContext(AppContext)
-  // const [user, setUser] = useState()
+
   const navigate = useNavigate()
   const nameInput = useRef()
   const passInput = useRef()

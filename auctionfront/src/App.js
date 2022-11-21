@@ -5,16 +5,15 @@ import Auth from './pages/Auth';
 import SingleAuction from './pages/SingleAuction';
 import './style/style.css';
 
-import { io } from "socket.io-client";
-
 export const AppContext = createContext(null)
 
 function App() {
 
   const [user, setUser] = useState()
-  const socket = io('http://localhost:5001')
+  const [timeLeft, setTimeLeft] = useState()
 
   useEffect(() => {
+
     const username = localStorage.getItem('username')
     if (username) {
       setUser({ name: username })
@@ -24,7 +23,7 @@ function App() {
   return (
     <BrowserRouter>
       <AppContext.Provider className='app shdw' value={
-        { user, setUser, socket }
+        { user, setUser, timeLeft, setTimeLeft }
       }>
 
         <Routes>
