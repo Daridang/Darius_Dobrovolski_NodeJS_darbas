@@ -12,7 +12,7 @@ function AuctionItem({ data, onClick }) {
 
       <div className='card__info'>
         <h3>{data.title}</h3>
-        <p><span>Time left: </span>{<Timer time={data.time} />}</p>
+        <div><p><span>Time left: </span></p>{<Timer itemData={data} />}</div>
         <p><span>Price: </span>{data.startPrice} Eur</p>
         <p><span>Bids: </span>{data.bids.length}</p>
       </div>

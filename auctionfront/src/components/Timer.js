@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { AppContext } from '../App'
 
-function Timer() {
+function Timer({ itemData }) {
+
+  const { socket } = useContext(AppContext)
+
   const [seconds, setSeconds] = useState(0)
   const [minutes, setMinutes] = useState(0)
   const [hours, setHours] = useState(0)
   const [days, setDays] = useState(0)
-  const demoDate = new Date()
-  const demoHours = 48
+
+  const timeLeft = itemData.time * 60 * 60 * 1000
 
   useEffect(() => {
-
-    const created = demoDate.getTime()
-    const hoursToMillis = demoHours * 60 * 60 * 1000
-    const deadline = created + hoursToMillis
-
+    const created = new Date(itemData.createdAt).getTime()
+    const deadline = created + timeLeft
     const timer = setInterval(function () {
 
       const now = new Date().getTime()
@@ -28,21 +29,48 @@ function Timer() {
       setMinutes(m)
       setSeconds(s)
 
-      console.log('seconds: ', s)
-
       if (t < 0) {
         clearInterval(timer)
       }
     }, 1000)
+
     return () => clearInterval(timer)
+    // socket.on('connect', () => {
+    //   console.log('onconnect: ', socket.id)
+    //   socket.emit('runTimer', {
+    //     id: itemData._id,
+    //     created: itemData.createdAt,
+    //     time: itemData.time
+    //   })
+    // })
+
+    // socket.on('timer', (arg) => {
+
+    //   console.log('ontimer: ', arg)
+    //   setDays(arg.d)
+    //   setHours(arg.h)
+    //   setMinutes(arg.m)
+    //   setSeconds(arg.s)
+    // })
+
+    // socket.on('stop', () => {
+    //   console.log('onstop')
+    //   socket.off('timer')
+    // })
+
+    // return () => {
+    //   socket.off("connect");
+    //   socket.off("timer");
+    // };
+
   }, [])
 
   return (
-    <div>
+    <p>
       {
         `${days}d:${hours > 9 ? hours : '0' + hours}h:${minutes > 9 ? minutes : '0' + minutes}m:${seconds > 9 ? seconds : '0' + seconds}s`
       }
-    </div>
+    </p>
   )
 }
 
