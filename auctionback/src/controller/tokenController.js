@@ -32,7 +32,7 @@ export const removeToken = async (refreshToken) => {
 }
 
 export const generateToken = (payload) => {
-  const accessToken = jwt.sign({ _id: payload }, process.env.JWT_ACCESS_SECRET, { expiresIn: '30m' })
+  const accessToken = jwt.sign({ _id: payload }, process.env.JWT_ACCESS_SECRET, { expiresIn: '30d' })
   const refreshToken = jwt.sign({ _id: payload }, process.env.JWT_REFRESH_SECRET, { expiresIn: '30d' })
   return {
     accessToken,
